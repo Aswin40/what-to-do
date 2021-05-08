@@ -10,17 +10,26 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
+    getActivitiesFromApi();
+  }, []);
+
+  const getActivitiesFromApi = () => {
+    setLoading(true);
     boredAPI
       .getActivities()
       .then((activityDetails) => setActivityDetails(activityDetails))
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  };
 
   return (
     <div className={`app ${activityDetails?.type}`}>
-      <Home activityDetails={activityDetails} loading={loading} />
+      <Home
+        activityDetails={activityDetails}
+        loading={loading}
+        getActivities={getActivitiesFromApi}
+      />
     </div>
   );
 }

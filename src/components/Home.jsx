@@ -1,14 +1,18 @@
 import React from "react";
 import Loader from "./Loader";
 
-const Home = ({ activityDetails, loading }) => {
+const Home = ({ activityDetails, loading, getActivities }) => {
   return (
     <React.Fragment>
       <div>
         <Intro />
       </div>
       <div className="activity-container">
-        <Activty activityDetails={activityDetails} loading={loading} />
+        <Activty
+          activityDetails={activityDetails}
+          loading={loading}
+          getActivities={getActivities}
+        />
       </div>
     </React.Fragment>
   );
@@ -23,11 +27,25 @@ const Intro = () => {
   );
 };
 
-const Activty = ({ activityDetails, loading }) => {
+const Activty = ({ activityDetails, loading, getActivities }) => {
   return (
     <div>
-      <Loader visible={loading} />
-      <p className={`activity-text`}> {activityDetails?.activity}</p>
+      {loading ? (
+        <Loader />
+      ) : (
+        <React.Fragment>
+          <p className={`activity-text`}> {activityDetails?.activity}</p>
+          <div className="try-something-else-button-container">
+            <button
+              style={{ textAlign: "center" }}
+              className="try-something-else-button"
+              onClick={getActivities}
+            >
+              Try Something Else
+            </button>
+          </div>
+        </React.Fragment>
+      )}
     </div>
   );
 };
