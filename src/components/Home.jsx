@@ -1,13 +1,14 @@
 import React from "react";
+import Loader from "./Loader";
 
-const Home = ({ activityDetails }) => {
+const Home = ({ activityDetails, loading }) => {
   return (
     <React.Fragment>
       <div>
         <Intro />
       </div>
       <div className="activity-container">
-        <Activty activityDetails={activityDetails} />
+        <Activty activityDetails={activityDetails} loading={loading} />
       </div>
     </React.Fragment>
   );
@@ -22,9 +23,10 @@ const Intro = () => {
   );
 };
 
-const Activty = ({ activityDetails }) => {
+const Activty = ({ activityDetails, loading }) => {
   return (
     <div>
+      <Loader visible={loading} />
       <p className={`activity-text`}> {activityDetails?.activity}</p>
     </div>
   );
